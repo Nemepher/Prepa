@@ -14,6 +14,7 @@ U,V = f(0,[X,Y])
 #Normalize arrows
 N = np.sqrt(U**2+V**2)  
 U2, V2 = U/N, V/N
+
 def vectorField():
     ax.quiver( X,Y,U2, V2)
 
