@@ -6,7 +6,7 @@ xMin=-20; xMax=20; yMin=-20; yMax=20
 vXNum=20; vYNum=20
 
 #Function 
-def f(t,x): return[x[1]-x[0],-5*x[0]+x[1]]
+def f(t,x): return[x[0]*x[1],x[1]+3]
 
 #Vector field
 X,Y = np.meshgrid( np.linspace(xMin,xMax,vXNum),np.linspace(yMin,yMax,vYNum) )
@@ -44,7 +44,7 @@ def update():
     #Equation solver
     t0=0; tEnd=10; dt=0.01 
     r=ode(f).set_integrator('vode', method='bdf',max_step=dt)
-    ic=[coords,[6,-4]]
+    ic=[coords,[0,0]]
     color=['r','b','g']
     for k in range(len(ic)):
         Y=[]
@@ -59,3 +59,6 @@ def update():
 
 update()
 plt.show()
+
+
+#%%
