@@ -1,4 +1,5 @@
 #%%
+
 def syracuse(n):
     if n%2==0 :
         return n/2
@@ -14,6 +15,7 @@ def flyTime(n):
 
 print(flyTime(2))
 
+""" 
 i=10
 t=0
 while t<100:
@@ -25,6 +27,7 @@ while t<100:
     i+=1
 
 print("done! n="+str(i-1)+" t="+str(t))
-exit
+exit """
+
 
 #%%
