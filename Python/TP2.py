@@ -151,3 +151,11 @@ while a<100:
     print(a)
 
 #%%
+c=1
+a=0
+while c<100:
+    c*=105/100
+    a+=1
+print(a)
+
+#%%

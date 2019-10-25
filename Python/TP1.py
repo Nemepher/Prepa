@@ -14,7 +14,7 @@ for i in range (6,10):
 print('kangourou')
 
 #%%
-#Ceci est un etit programme pour deviner votre âge 
+#Ceci est un petit programme pour deviner votre âge 
 res = 0
 for k in range(7):
     for i in range(128):
