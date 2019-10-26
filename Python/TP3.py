@@ -18,14 +18,14 @@ def Syracuse(n):
 	print(n, end=' ')
 	while n>1:
 		n=T(n)
-		print(n,end=' ')
-	
+	print(n,end=' ')
+
 def SyracuseL(n):
 	i=0
 	while n>1:
 		i+=1
 		n=T(n)
-	return i	
+	return i
 
 Syracuse(14)
 print("length :", SyracuseL(14))
@@ -60,22 +60,22 @@ def decompte(J,M,A):
 	l,j,m,a=0,localtime()[2],localtime()[1],localtime()[0]
 
 	if A>a:
-		return	
-	
+		return
+
 	l+=(j-J)
-		
+
 	while m>M:
 		if bissextile(a) and m==2:
 			l+=29
 		else:
-			l+=jM[m]	
+			l+=jM[m]
 		m-=1
 
 	while m<M:
 		m+=1
 		if bissextile(a) and m==2:
 			l-=29
-		else: 
+		else:
 			l-jM[m]
 
 	while a>A:
@@ -87,12 +87,12 @@ def decompte(J,M,A):
 	return l
 
 print("decompte :", decompte(29,10,2001))
- 
+
 #4
 def conversion10(L,b):
 	n=0
 	l=len(str(L))
-	for i in range(0,l):	
+	for i in range(0,l):
 		n+=(b**i)*int(str(L)[l-1-i])
 	return n
 
@@ -103,7 +103,7 @@ def conversion(x,b):
 		x=x//b
 	o.reverse()
 	return o
-		
+
 	#j=0
 	#while x>0:
 	#	i=0
@@ -113,9 +113,9 @@ def conversion(x,b):
 	#	w-=o[j]*(b**i)
 	#	j+=1
 	#return[o.reverse()]
-		
+
 print(conversion10(101010101,2))
-print(conversion(102112,2))	
+print(conversion(102112,2))
 
 #5
 from math import floor
@@ -125,18 +125,18 @@ def premier(n):
 	while i < floor(n)  and premier:
 		if n%i==0:
 			premier = False
-		i+=1	
+		i+=1
 	return premier
 
-def factorise(n):
+'''def factorise(n):
 	o=[]
 	i=2
-	while i<
+        while i<10:
 		if n%i==0:
 			if premier(i):
 				o.append(i)
-			n=n//i	
-		
+			n=n//i
+'''
 
 print(premier(45))
 
