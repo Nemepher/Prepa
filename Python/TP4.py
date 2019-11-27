@@ -142,7 +142,8 @@ echange(L,1,2)
 #print(L)
 
 def copiematrice(L):
-    return [[i for i in L[j] ] for j in range(len(L)) ]
+    #return [[i for i in L[j] ] for j in range(len(L)) ]
+    return[L[j][:] for j in range(len(L)) ]
 
 L= [[1,2],[3,4]]
 L2 = copiematrice(L)
