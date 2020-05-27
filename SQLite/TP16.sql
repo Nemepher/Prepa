@@ -20,25 +20,26 @@ ALTER TABLE livres ADD COLUMN annee INT;
 
 -- 5 -- 
 INSERT INTO livres VALUES 
-("tg ","Werber","","123","","2001"),
-("jb","khbjkhb","nkn","321321","Augustin Albert","1989");
+("Les Contemplations","Victor Hugo","","123","Augustin","1856"),
+("La Supplication","Svetlana Alexievitch","","548","","1997");
 
 -- 6 -- La colonne ISBN est la clée primaire, imposible d'ajouter des doublons
-INSERT INTO livres VALUES ("Lefefe ","bhh","","123","","20001");
+INSERT INTO livres VALUES ("Le Gai savoir","Friedrich Nietzsche","","123","","1887");
+INSERT INTO livres VALUES ("Le Gai savoir","Friedrich Nietzsche","","151","","1887");
 
 -- 8 --
 CREATE TABLE ecrivains(
 	Nom TEXT NOT NULL,
 	Prenom TEXT NOT NULL,
-	Pays DEFAULT NULL,
+	Pays TEXT,
 	Anneenaissance INT,
 	Anneedeces INT
 );
 
 -- 9 --
 INSERT INTO ecrivains VALUES 
-("Le ","bhh","","1203","2001"),
-("jb","khbjkhb","nkn","1021","1989");
+("Hugo","Victor","France","1802","1885"),
+("Svetlana","Alexievitch","Ukraine","1948","");
 
 -- 10 --
 ALTER TABLE ecrivains RENAME TO auteurs;
@@ -48,7 +49,7 @@ CREATE TABLE titi(toto);
 DROP TABLE titi;
 
 -- 12 -- 
-UPDATE livres SET proprietaire = "Jean Valjean" WHERE auteur = "Werber";
+UPDATE livres SET proprietaire = "Jean Valjean" WHERE auteur != "Victor Hugo";
 
 -- 13 --
 .output livres.sql
@@ -64,4 +65,5 @@ SELECT * FROM livres;
 .mode column
 .import livres.csv livres2
 SELECT * FROM livres2;
+
 
