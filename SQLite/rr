@@ -1,0 +1,8 @@
+
+-- 47 --
+SELECT nom FROM departements
+	WHERE NOT EXISTS (
+		SELECT * FROM communes 
+		JOIN departements ON communes.num_departement == departements.num_departement 
+		WHERE population_2010 >= 30000 
+	);
