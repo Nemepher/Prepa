@@ -1,0 +1,37 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead[L]{Augustin Albert}
+\fancyhead[R]{MPSI2 --- 2019/2020}
+
+\begin{center}
+\textsc{\bfseries\huge DM 9}
+\end{center}
+\textbf{\large Exercice 1 :}
+
+\begin{enumerate}[label=\arabic*)]
+	
+\item Soit \(x\in R+, t \to  b(t)exp(-x\times a(t)) \) est continue par opertations uselles et F est donc bien définie.
+	
+\item Soit \((x,h) \in truc \times truc\). D'après l'inegalité sur les sommes de Riemman,
+
+\[\left | e^{-(x+h)\alpha} \ - \ \sum\limits_{k=0}^{1} \frac{(-\alpha)^{k} e^{-x\alpha}}{k!} (h+x-x)^{k} \right | \leq \frac{(h+x-x)^{2}}{2!}\times \max\limits_{t \in truc}\mid-\alpha^{3}e^{-t\alpha} \mid \]
+
+		Soit :\[\mid e^{-(x+h)\alpha} -  e^{-x\alpha} + h \alpha e^{-x\alpha} \mid \leq \frac{h^{2}}{2}\mid \alpha^{2} \mid \]
+
+\item Soit x,h in machin. Pour tout t dans l'intervalle [0 4], l'inégalité  précedente est vrai pour le complexe \(\alpha := \alpha (t)\) et est conservé lors du produit par \(\abs b(t) \) donc 
+	\[ \mid b(t)e^{-(x+h)\alpha (t)} -  b(t)e^{-x\alpha (t)} + h \alpha (t) b(t)e^{-x\alpha (t)} \mid \leq b(t)\frac{h^{2}}{2} \mid \alpha (t)^{2} \mid\]
+et par croissance de l'integrale et inegalité triangulaire 
+		\[ \left | \int_{0}^{1}b(t)e^{-(x+h)\alpha (t)}dt -  \int_{0}^{1}b(t)e^{-x\alpha (t)}dt + h \int_{0}^{1}\alpha (t) b(t)e^{-x\alpha (t)}dt \right | \]	
+		\[\leq \int_{0}^{1} \left | b(t)e^{-(x+h)\alpha (t)} -  b(t)e^{-x\alpha (t)} + h \alpha (t) b(t)e^{-x\alpha (t)} \right | dt \leq \int_{0}^{1}b(t)\frac{h^{2}}{2}\mid \alpha(t)^{2} \mid dt \]
+
+
+
+
+\end{enumerate}
+\end{document}

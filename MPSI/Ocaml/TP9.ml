@@ -18,7 +18,7 @@ let tableau_aleatoire n a =
                 v.(i) <- Random.int a
         done;v;;
 
-(* 3 -- List.sort est de type ('a -> 'a -> int) -> 'a list -> 'a list. Il faut lui fournir en argument une fonction de comparaison puis la liste en question *)
+(* 3 -- List.sort est de type ('a -> 'a -> int) -> 'a list -> 'a list. Il faut lui fournir en argument une fonction de comparaison (utilisée pour effectuer celles-ci)  puis la liste en question *)
 
 (* 4 *) 
 
@@ -26,7 +26,7 @@ let tableau_aleatoire n a =
 let temps s f x = 
         let t = Sys.time() in
         let fx = f x in
-        print_string "Temps d'execution de "; print_string s; print_float (Sys.time() -. t); print_string "s\n";;
+        print_string "Temps d'exécution de "; print_string s; print_float (Sys.time() -. t); print_string "s\n";;
 
 let array_of_list l = 
         let a = Array.make (List.length l) 0 in
@@ -167,7 +167,7 @@ let une_passe l =
         let rec aux l b = match l with 
                 | [] | [_] -> (l,b)
                 | t::q -> let (l2,b2) = aux q b in let t2 = List.hd l2 in 
-                if t>=t2 then (t::l2, b)
+                if t<=t2 then (t::l2, b)
                 else begin (t2::t::(List.tl l2), true) end; 
         in (aux l false);;
 
@@ -175,26 +175,19 @@ let rec tri_bulle l = let (l2,b) = une_passe l in match l2,b with
         | _,false | [],_ | [_],_ -> l2
         | t::q, true -> t::(tri_bulle q);;
 
-(* 9 -- TODO *)
+
+(* 9 -- Voir TP9-aux *)
 
 (* 10 *)
-let une_passe2 l n = 
-        let rec aux l b n = match l with 
-                | [] | [_] -> (l,b,n)
-                | t::q -> let (l2,b2,n2) = aux q b n in let t2 = List.hd l2 in 
-                if t>=t2 then (t::l2, b, (n2+1))
-                else (t2::t::(List.tl l2), true, (n2+1) ); 
-        in (aux l false n);;
-
 let tri_bulle2 l =  
-        let rec aux l n = let (l2,b,n2) = une_passe2 l n in match l2,b with 
+        let rec aux l n = let (l2,b),n2 = une_passe l, (n-1 + max 1 (List.length l)) in match l2,b with 
                 | _,false | [],_ | [_],_ -> (l2,n2)
                 | t::q, _ -> let (q2,n3) = aux q n2 in (t::q2,n3);
         in aux l 0;;
 
-(* 11 -- TODO *)
+(* 11 -- Voir TP9-aux *)
 
-(* 12 -- TODO *)
+(* 12 -- Voir TP9-aux *)
 
 (* 13 *)
 let echange3 i j v =
@@ -212,7 +205,7 @@ let tri_rapide_tableau v =
                 aux debut (!d-1); aux (!d+1) fin end
         in aux 0 (Array.length v - 1);;
 
-(* Version alternative *)
+(* Version alternative avec moins d'échanges *)
 let tri_rapide_tableau2 v = 
         let rec aux debut fin = if fin-debut>0 then begin
                 let g = ref (debut-1) in 
@@ -225,7 +218,7 @@ let tri_rapide_tableau2 v =
 
 (* 14 *)
 
-(* version abominable *)
+(* version abominable mais rapide à écrire *)
 let rec divise l a d g = match l with 
         |[] -> (d,g)
         |t::q -> if t<=a then divise q a (t::d) g else divise q a d (t::g);;
@@ -247,9 +240,9 @@ let tri_rapide l =
 
         in aux l [];;    
 
-(* 15 -- TODO *)
+(* 15 -- Voir TP9-aux *)
 
-(* 16 -- TODO *)
+(* 16 -- Voir TP9-aux *) 
 
 (* 17 *)
 let tri_rapide_tableau2 v = 
@@ -262,5 +255,5 @@ let tri_rapide_tableau2 v =
                 aux debut (!d-1); aux (!d+1) fin end
         in aux 0 (Array.length v - 1);;
 
-(* 18 -- TODO *)
+(* 18 -- Voir TP9-aux *)
 

@@ -1,0 +1,24 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{../mpsi}
+
+\newcommand{\sumkn}{\bigsum_{k=1}^{n}}
+\newcommand{\intentp}[3]{\intent{#1}{#2}\backslash\lbrace{#3}\rbrace}
+\newcommand{\fai}[2]{\forall #1 \in #2,\ }
+
+\begin{document}
+\textsc{\bfseries\huge Exercice 11}\\
+
+Soit A \(\in \M_{n}(\C) \) tel que pout tout entier i de \(\intent{1}{n}\),
+\[ \card{A_{i,i}} > \bigsum_{j \in \intentp{1}{n}{i}} \card{A_{i,j}} \]
+Montrons par l'absurde que A est inversible et supposons donc le contraire.\\ 
+
+Can(A) n'est alors pas surjectif car \(I_{n}\) n'admet par hypothèse aucun antécédant. Or, Can(A) est une application linéaire de \(\M_{n}(\C)\) dans lui même. Cet ensemble étant de dimension fini, Can(A) ne saurait être injectif.\\
+
+Le noyau de Can(A) n'est alors pas réduit à 0. On peut donc fixer B \( \in \M_{n}(\C)\) tel que AB=0 et B \(\ne 0\). Fixons alors \(j \in \intent{1}{n}\) tel que \(E := \left\{\card{B_{i,j}} \tq B_{i,j}\neq0,\ i \in \intent{1}{n}\right\}\)  soit non vide (Et il en existe car sinon B serait nul !) et fixons \(m \in\intent{1}{n} \tq \card{B_{m,j}}=max(E)\) qui existe car E est une partie de \(\R\) finie non vide.\\
+
+Puisque AB=0, \(0=[AB]_{m,j}=\sumkn A_{m,k}B_{k,j} \donc : \) \[  \card{A_{m,m}}\card{B_{m,j}} = \card{\bigsum_{k \in \intentp{1}{n}{m} }A_{m,k}B_{k,j}} \leq\bigsum_{k \in \intentp{1}{n}{m} }\card{A_{m,k}}\card{B_{k,j}} \leq \bigsum_{k \in \intentp{1}{n}{m} }\card{A_{m,k}}\card{B_{m,j}} \] 
+
+Et puisque \(m \in E\) alors \(B_{m,j} \ne 0\) et en divisant de chaque coté on obtient  \[\card{A_{m,m}} \leq \bigsum_{k \in \intentp{1}{n}{m} }\card{A_{m,k}}  \]
+
+ce qui contredit l'hypothèse faite sur A, qui est ainsi inversible.
+\end{document}

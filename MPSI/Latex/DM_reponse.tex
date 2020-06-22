@@ -1,0 +1,120 @@
+\documentclass[a4paper, 10pt]{article}
+
+\usepackage{../mpsi}%il faut le fichier mpsi.sty dans le repertoire du présent fichier *.tex
+
+\def\numeroDM{9}
+\def\datederemise{jeudi 19 mars}
+\def\Titre{Intégration}
+\newcommand{\sujet}[1]{}
+\newcommand{\reponse}[1]{\textit{#1}}
+
+%mise en page
+\usepackage[top=3cm, bottom=2cm, left=1.6cm, right=1.6cm]{geometry}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[R]{\reponse{Un corrigé~---~}DM\numeroDM~---~\thepage/\pageref{LastPage}}
+\fancyhead[L]{MPSI2~---~Lycée \textsc{Malherbe}~---~\annee}
+
+%%Théorèmes et propositions
+
+%type de theoreme
+%\newtheoremstyle%
+%{nom}% nom du style
+%{espac-avant}% espace avant l'environnement
+%{espace-apr�s}%espace apr�s l'environnement
+%{fonte-corps}% % gras, italique, pour le corps de l'environnement
+%{retrait}% retrait de la premi�re ligne
+%{pont-titre}% gras, italique, etc. mais pour le titre
+%{ponctuation}% c'est clair, non ?
+%{espace entre le titre et le corps}
+%{style-titre}% Attention, �a c'est compliqu�, mais on peut le laisser vide,
+
+\newtheoremstyle
+{exo}
+{}
+{}
+{\large}
+{}
+{\bfseries\scshape}
+{}
+{\newline}
+{\thmname{#1} \thmnumber{#2} : \thmnote{{\bf(#3)}}}
+
+\theoremstyle{exo}
+\newtheorem{exo}{Exercice}
+
+\begin{document}
+\pagestyle{fancy}
+
+\begin{center}
+\textsc{\bfseries\huge \Titre}
+\end{center}
+\noindent\sujet{{\small Ce DM est à me remettre le \datederemise.
+Vous rédigerez ce DM en binôme.}}
+
+\begin{exo}[Quelques intégrales impropres classiques]
+  Le but du problème est de calculer les éventuelles limites suivantes, lorsque $x\to +\infty$, de :
+  $$\int_0^x\e^{-t^2}\d t \et \int_0^x\frac{\sin(t)}{t}\d t.$$
+  \begin{enumerate}[I.]
+  \item Soient $(a,b)\in \cont{[0,1]}{\C}^2$ tel que $\re{a}$ est une fonction positive. On pose alors,
+    $$F:\R_+\to\C,\,x\mapsto\int_0^1b(t)\e^{-xa(t)}\d t.$$
+    On va montrer dans cette partie que $F$ est dérivable et exprimer sa dérivée sous forme intégrale.
+    \begin{enumerate}[1.]
+    \item Justifier que $F(x)$ est bien défini pour tout réel positif $x$.
+
+      \reponse{Écrivez ici votre réponse sans faire de saut de ligne. Pour un retour à la ligne utiliser \texttt{\\}.$\qed$}
+    \item Soit $\alpha$ un nombre complexe de partie réelle positive. En appliquant soigneusement une formule de \nom{Taylor} à la fonction $t\mapsto \e^{-\alpha t}$, montrer que
+      $$\forall (x,h)\in\R^2,(x,x+h)\in,\R_+^2\Rightarrow \va{\e^{-(x+h)\alpha}-\e^{-x\alpha}+h\alpha\e^{-x\alpha}}\leq \frac{h^2}{2}\va{\alpha}^2.$$
+
+      \reponse{}
+    \item En déduire que pour tout $(x,h)\in\R^2$ tel que $[\min\left\{x,x+h\right\},\max\left\{x,x+h\right\}]\subset\R_+$,
+      $$\va{\int_0^1b(t)\e^{-(x+h)a(t)}\d t-\int_0^1b(t)\e^{-xa(t)}\d t+h\int_0^1b(t)a(t)\e^{-xa(t)}\d t}\leq \frac{h^2}{2} \int_0^1\va{b(t)}\va{a(t)}^2\d t.$$
+
+\reponse{}
+  \item En déduire que $F$ est dérivable sur $\R_+$ et que pour tout réel $x$ positif,
+    $$F'(x)=-\int_0^1b(t)a(t)\e^{-xa(t)}\d t.$$
+
+\reponse{}
+  \end{enumerate}
+\item Dans cette partie on considère la fonction
+  $$G:\R_+\to \R,\,x\mapsto \int_0^1\frac{\e^{-x(1+t^2)}}{1+t^2}\d t.$$
+  \begin{enumerate}[1.]
+  \item Justifier soigneusement que $G$ est dérivable sur $\R_+$ et préciser sa dérivée.
+
+\reponse{}
+  \item\label{constante} En déduire que $\disp \R_+\to \R,\,x\mapsto G\left(x^2\right)+\left(\int_0^{x}\e^{-t^2}\d t\right)^2$ est constante.
+
+\reponse{}
+  \item Montrer que pour tout réel $x$ positif,
+    $$0\leq G(x^2)\leq\frac{\pi}{4} \e^{-x^2}.$$
+
+\reponse{}
+  \item En déduire très soigneusement que
+    $$\int_0^x\e^{-t^2}\d t\tend{x\to+\infty}\frac{\sqrt{\pi}}{2}.$$
+
+\reponse{}
+  \end{enumerate}
+\item Dans cette partie on considère la fonction
+  $$H:\R_+\to \C,\,x\mapsto \int_0^1\exp\left(-x\e^{\frac{\i\pi}{2}t}\right)\d t.$$
+  \begin{enumerate}[1.]
+  \item\label{dérivée} Justifier soigneusement que $H$ est dérivable sur $\R_+$ et que pour tout réel strictement positif $x$,
+    $$\frac{\pi}{2}H'(x)=-\frac{\sin(x)}{x}+\i\frac{\e^{-x}-\cos(x)}{x}.$$
+
+\reponse{}
+  \item Justifier que les fonctions $x\mapsto \frac{\sin(x)}{x}$ et $x\mapsto \frac{\e^{-x}-\cos(x)}{x}$ se prolongent continûment à $\R_+$. On notera $f$ et $g$ leurs prolongements continus respectifs.
+
+\reponse{}
+  \item\label{égalité} Montrer que pour tout réel positif $x$,
+    $$\frac{\pi}{2}\left(H(x)-1\right)=-\int_0^xf(t)\d t +\i\int_0^xg(t)\d t.$$
+
+\reponse{}
+  \item En déduire que $H(x)\tend{x\to+\infty}0$.
+
+\reponse{}
+  \item Conclure que $\disp \int_0^xf(t)\d t\tend{x\to +\infty}\frac{\pi}{2}$.
+
+\reponse{}
+  \end{enumerate}
+\end{enumerate}
+\end{exo}
+\end{document}

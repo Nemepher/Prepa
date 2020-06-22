@@ -1,0 +1,14 @@
+documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+{\bfseries\large Question 6:}\\
+Approximation de I = \(\int_{0}^{1}t^{2}dt\) par différentes méthodes :
+\begin{itemize}
+\item Rectangle : \(I_{n} = \frac{1}{n}\sum_{0}^{n-1}(\frac{k}{n})^{2}=\frac{(n-1)(2n-1)}{6n^{2}}\)
+\item Points milieux : \(I_{n} = \frac{1}{n}\sum_{0}^{n-1}\frac{k^{2}+k+1/4}{n^{2}}=\frac{4n^{2}-1}{12n^{2}}\)
+\item Trapèzes : \(I_{n} = \frac{1}{n}(\frac{1}{2} + \sum_{1}^{n-1}(\frac{k}{n})^{2}=\frac{1}{2n}+\frac{(n-1)(2n-1)}{6n^{2}}\)
+\item Simpson : \(I_{n} = \frac{1}{6n}(1+2\sum_{1}^{n-1}(\frac{k}{n})^{2}+4\sum_{0}^{n-1}\frac{k^{2}+k+1/4}{n^{2}})=\frac{4n^{2}+3n-1+(n-1)(2n-1)}{18n^{2}}\)
+\end{itemize}
+\end{document}
+
+

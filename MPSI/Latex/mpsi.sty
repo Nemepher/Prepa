@@ -1,0 +1,285 @@
+%% Informations générales
+\NeedsTeXFormat{LaTeX2e}[1999/01/01]
+\ProvidesPackage{mpsi}[2016/04/01]
+
+%% Chargement des extensions
+%\RequirePackage[dvips]{graphicx}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[francais]{babel}
+%\RequirePackage[dvips]{graphicx}
+\RequirePackage{amsfonts}
+%\RequirePackage[all]{xy}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+%\RequirePackage[cm]{fullpage}
+%\RequirePackage{pstricks}
+%\RequirePackage{pst-plot}
+%\RequirePackage{pstricks-add}
+%\RequirePackage{pst-math}
+%\RequirePackage{auto-pst-pdf}
+\RequirePackage{tikz}
+\RequirePackage{tkz-tab}
+%\RequirePackage{eurosym}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage{enumerate}
+\RequirePackage{ifthen}
+\RequirePackage{cancel}
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs}
+\RequirePackage{cancel}
+%\RequirePackage{float}
+%% Déclaration des options
+%\DeclareOption{option}{...}
+%\DeclareOption*{...}
+%\ProcessOptions
+
+%% Définition des commandes
+\newcommand{\e}{\mathrm{e}}
+\renewcommand{\i}{\mathrm{i}}
+\renewcommand{\j}{\mathrm{j}}
+\newcommand{\Tau}{2\mathrm{\pi}}
+\newcommand{\eip}[1]{\e^{\i#1}}
+\newcommand{\eim}[1]{\e^{-\i#1}}
+\newcommand{\eif}[2]{\e^{\i\Tau\frac{#1}{#2}}}
+\newcommand{\disp}{\displaystyle}
+\renewcommand{\qed}{\blacksquare}
+\newcommand{\bigsum}{\sum\limits}
+%%Logique
+\newcommand{\NON}{\mathrm{non}}
+\newcommand{\ET}[2]{\left[#1\quad \mathrm{et}\quad #2\right]}
+\newcommand{\OU}[2]{\left[#1\quad \mathrm{ou}\quad #2\right]}
+\newcommand{\Vrai}{\mathrm{Vrai}}
+\newcommand{\Faux}{\mathrm{Faux}}
+
+%%Ensembles
+\newcommand{\scr}[1]{\mathscr{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\U}{\mathbb{U}}%complexes de module 1
+\newcommand{\D}{\mathbb{D}}%complexes de module <1
+\newcommand{\K}{\mathbb{K}}%un corps
+\newcommand{\F}{\mathbb{F}}%un corps (fini en général)
+\renewcommand{\H}{\mathbb{H}}%quaternion
+\newcommand{\intent}[2]{\left[\!\left[#1,#2\right]\!\right]}%intervalle d'entiers entre #1 et #2
+\newcommand{\Part}[1]{\mathscr{P}\left(#1\right)}%ensemble des parties de #1
+\newcommand{\id}[1]{\mathrm{id}_{#1}}%application identité sur #1
+\newcommand{\comp}[1]{\overline{#1}}%complémentaire de #1
+\newcommand{\ind}[1]{1\!\!1_{#1}}
+\newcommand{\card}[1]{\left|#1\right|}
+\renewcommand{\S}[1]{\mathrm{S}_{#1}}%groupe symétrique
+\newcommand{\A}[1]{\mathrm{A}_{#1}}%groupe symétrique alterné
+\newcommand{\fix}[1]{\mathrm{Fixe}\left(#1\right)}
+\newcommand{\dif}[2]{#1\setminus#2}%différence ensembliste
+\newcommand{\pr}{\pi} %projection canonique sur un facteur
+\newcommand{\cl}[1]{\overline{#1}} % classe d'équivalence
+\newcommand{\cons}[1]{\widetilde{#1}} %application constante
+
+%%Nombres complexes et réel
+\newcommand{\ent}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\dec}[1]{\left\{#1\right\}}
+\newcommand{\pos}[1]{#1^+}
+\renewcommand{\neg}[1]{#1^-}
+\newcommand{\va}[1]{\left|#1\right|}
+\newcommand{\re}[1]{\mathcal{R}e\left(#1\right)}
+\newcommand{\im}[1]{\mathcal{I}m\left(#1\right)}
+\newcommand{\conj}[1]{\overline{#1}}
+\renewcommand{\arg}[1]{\mathrm{arg}\left(#1\right)}%un argument de...
+\newcommand{\Arg}[1]{\mathrm{Arg}\left(#1\right)}%LE argument de...
+
+%%Algèbre
+\newcommand{\Hom}[2]{\mathrm{Hom}\left(#1,#2\right)}%ensemble des morphismes
+\newcommand{\End}[1]{\mathrm{End}\left(#1\right)}%gensemble des endomorphismes
+\newcommand{\Aut}[1]{\mathrm{Aut}\left(#1\right)}%groupe des automorphismes
+\newcommand{\eng}[1]{\langle #1 \rangle}%sous-truc engendré par une partie
+\newcommand{\inv}[1]{#1^{\times}}%groupe des inversibles d'un anneau
+\newcommand{\Frac}[1]{\mathrm{Frac}\left(#1\right)}%corps des fractions d'un anneau intègre
+\renewcommand{\deg}[1]{\mathrm{deg}\left(#1\right)}
+\newcommand{\cd}[1]{\mathrm{cd}\left(#1\right)}
+\newcommand{\X}{\mathrm{X}}
+\newcommand{\Y}{\mathrm{Y}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\eval}[1]{\mathrm{ev}_{#1}}%morphisme d'évaluation
+\newcommand{\zero}[2]{\mathcal{Z}_{#2}\left(#1\right)}%racines d'un polynôme
+\newcommand{\val}[2]{\nu_{#1}\left(#2\right)}%multiplicité d'une racine, d'un nombre premier
+\newcommand{\PGCD}[2]{#1\wedge #2}
+\newcommand{\PPCM}[2]{#1\vee #2}
+\renewcommand{\cong}[3]{#1\equiv#2 \,\left[#3\right]}
+\renewcommand{\div}[2]{#1 | #2} %relation de divisibilité
+\newcommand{\notdiv}[2]{#1 \nmid #2} %relation de non divisibilité
+\newcommand{\DIV}[1]{\scr{D}\left(#1\right)} %ensemble des diviseurs de…
+\newcommand{\arr}[2]{\mathrm{A}_{#2}^{#1}} %nombre d'arrengements, version française
+\newcommand{\comb}[2]{\mathrm{C}_{#2}^{#1}} %nombre de combinaisons, version française
+
+%%Algèbre linéaire
+\newcommand{\vect}[1]{\vec{#1}}
+\newcommand{\Vect}{\mathrm{Vect}}
+\newcommand{\Ker}{\mathrm{Ker}}
+\renewcommand{\Im}{\mathrm{Im}}
+\newcommand{\pro}[2]{\mathrm{p}_{#1\slash\!\slash #2}}
+\newcommand{\sym}[2]{\mathrm{s}_{#1\slash\!\slash #2}}
+\newcommand{\rg}{\mathrm{rg}}
+\renewcommand{\dim}[1]{\mathrm{dim}\left(#1\right)}
+\newcommand{\codim}{\mathrm{codim}}
+\newcommand{\Tr}[1]{\mathrm{Tr}\left(#1\right)}%trace
+\newcommand{\tr}[1]{{}^{t}\hspace{-0.1cm}#1}%transposé
+\newcommand{\sys}[2]{\left\{\begin{array}{#1}#2\end{array}\right. }
+\newcommand{\matrice}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+\newcommand{\deter}[2]{\left|\begin{array}{#1}#2\end{array}\right|}
+\newcommand{\pass}[2]{\mathcal{P}_{#1}^{#2}}
+\newcommand{\M}{\mathscr{M}}
+\newcommand{\I}{\mathbf{I}}
+\renewcommand{\L}{\mathscr{L}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Sym}[1]{\scr{S}_{#1}\left(\R\right)}
+\newcommand{\diag}[1]{\mathrm{diag}\left(#1\right)}
+\newcommand{\Tri}[3]{\mathrm{T}_{#2}^{#1}\left(#3\right)}
+\newcommand{\Diag}[2]{\mathrm{D}_{#1}\left(#2\right)}
+\newcommand{\can}{\mathrm{Can}}
+\newcommand{\Mat}[3]{\mathrm{Mat}_{#1,#2}\left(#3\right)}%matrice d'une application linéaire
+\newcommand{\mat}[2]{\mathrm{Mat}_{#1}\left(#2\right)}%matrice d'un endomorphisme (même base au départ et à l'arrivée)
+\newcommand{\scal}[2]{\langle #1,#2 \rangle}
+\newcommand{\norme}[1]{\left\|#1\right\|}
+\newcommand{\ortho}[1]{#1^{\perp}}
+\newcommand{\somortho}{\stackrel{\perp}{\oplus}}
+\newcommand{\spe}[1]{\mathrm{Sp}\left(#1\right)}%spectre d'un endo, d'une matrice
+\newcommand{\sep}[2]{E_{#2}\left(#1\right)}
+\newcommand{\Dil}[2]{\mathrm{D}_{#1,#2}}
+\newcommand{\Trans}[2]{\mathrm{T}_{#1,#2}}
+\renewcommand{\det}{\mathrm{det}}
+\newcommand{\com}[1]{\mathrm{Com}\left(#1\right)}
+
+%%Analyse
+\newcommand{\symbole}{\triangle}
+\newcommand{\vois}[1]{\mathcal{V}_{#1}}
+\newcommand{\boule}[2]{\mathrm{B}\left(#1,#2\right)}
+\newcommand{\adh}[1]{\overline{#1}}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\sh}{\mathrm{sh}}
+\renewcommand{\th}{\mathrm{th}}
+\newcommand{\argch}{\mathrm{Argch}}
+\newcommand{\argsh}{\mathrm{Argsh}}
+\newcommand{\argth}{\mathrm{Argth}}
+\renewcommand{\arccos}{\mathrm{Arccos}}
+\renewcommand{\arcsin}{\mathrm{Arcsin}}
+\renewcommand{\arctan}{\mathrm{Arctan}}
+\newcommand{\sign}[1]{\mathrm{signe}\left(#1\right)}
+\newcommand{\local}[1]{\underset{#1}{=}}
+\newcommand{\equi}[1]{\underset{#1}{\sim}}
+\def\eps{\@ifnextchar[{\@witha}{\@withouta}}
+\def\@witha[#1]#2{\underset{#2}{\scriptscriptstyle{\mathcal{O}}}\left(#1\right)}
+\def\@withouta#1{\underset{\scriptscriptstyle{#1}}{\scriptscriptstyle{\mathcal{O}}}\left(1\right)}%\eps[(x-a)^n]{x\to a} produint un petit o "complet" et \eps{x\to a} se contente d'un petit de 1, le seul vraiment utile...
+\def\B{\@ifnextchar[{\@with}{\@without}}
+\def\@with[#1]#2{\underset{#2}{\mathcal{O}}\left(#1\right)}
+\def\@without#1{\underset{\scriptscriptstyle{#1}}{\mathcal{O}}\left(1\right)}%même chose avec le grand o
+\newcommand{\negl}{\ll}
+\newcommand{\tend}[1]{\underset{\scriptscriptstyle{#1}}{\longrightarrow}}
+\renewcommand{\d}{\mathrm{d}}
+\def\cont{\@ifnextchar[{\@withcont}{\@withoutcont}} %fonctions de classe C^n de D vers K \cont[n]{D}{K}
+\def\@withcont[#1]#2#3{\mathscr{C}^{#1}\left(#2,#3\right)}
+\def\@withoutcont#1#2{\mathscr{C}\left(#1,#2\right)}
+\def\der{\@ifnextchar[{\@withder}{\@withoutder}}
+\def\@withder[#1]#2#3{\mathscr{D}^{#1}\left(#2,#3\right)}%fonctions de classe D^n de D vers K \der[n]{D}{K}
+\def\@withoutder#1#2{\mathscr{D}\left(#1,#2\right)}
+\newcommand{\partielle}{\partial}
+\newcommand{\grad}[2]{\nabla\left(#1\right)\left(#2\right)}
+\newcommand{\hess}[2]{\nabla^2\left(#1\right)\left(#2\right)}
+\newcommand{\escal}[2]{\mathscr{E}\left(#1,#2\right)}
+\newcommand{\contmor}[2]{\mathscr{C}\mathcal{M}\left(#1,#2\right)}
+\newcommand{\riemann}[2]{\mathscr{R}\left(#1,#2\right)}
+%%Probabilités
+\newcommand{\Proba}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\bern}[1]{\mathscr{B}\left(#1\right)}
+\newcommand{\bino}[2]{\mathscr{B}\left(#1,#2\right)}
+\newcommand{\geom}[1]{\mathscr{G}\left(#1\right)}
+\newcommand{\pois}[1]{\mathscr{P}\left(#1\right)}
+\newcommand{\expo}[1]{\mathscr{E}\left(#1\right)}
+\newcommand{\unif}[1]{\mathscr{U}\left(#1\right)}
+\newcommand{\gaus}[2]{\mathscr{N}\left(#1,#2\right)}
+\newcommand{\Proc}[2]{%
+\Proba_{#1}%
+\ifthenelse{\equal{#2}{}}{}{\left(#2 \right)}
+}
+\newcommand{\suit}{\hookrightarrow}
+\newcommand{\cloi}{\stackrel{\mathcal{L}}{\longrightarrow}}
+\newcommand{\cproba}{\stackrel{\Proba}{\longrightarrow}}
+\newcommand{\cov}[2]{\mathrm{cov}\left(#1,#2\right)}
+\newcommand{\corr}[2]{\rho\left(#1,#2\right)}
+\newcommand{\ecart}[1]{\sigma\left(#1\right)}
+\newcommand{\taylor}[3]{\mathrm{T}_{#1,#2,#3}}
+
+
+%%texte en mode math
+\newcommand{\tq}{\text{ tq }}
+\newcommand{\si}{\text{ si }}
+\newcommand{\sinon}{\text{ sinon}}
+\newcommand{\et}{\text{ et }}
+\newcommand{\ou}{\text{ ou }}
+\newcommand{\en}{\text{ en }}
+\newcommand{\quand}{\text{ quand }}
+\newcommand{\HR}{\text{HR}}
+\newcommand{\donc}{\text{ donc }}
+\newcommand{\car}{\text{ car }}
+\newcommand{\resp}{\text{resp}}
+
+%%symbole de difficulté ou de "j'aime"
+\newcommand{\diff}{$\spadesuit\,$}
+\newcommand{\coeur}{$\heartsuit\,$}
+
+
+%%texte dans le texte
+\newcommand{\psse}{les propositions suivantes sont équivalentes :}
+\newcommand{\cad}{c'est-à-dire}
+\newcommand{\ie}{{\textit ie}}
+\newcommand{\lci}{loi de composition interne}
+\newcommand{\contra}{contradiction}
+\newcommand{\sev}{sous-espace vectoriel}
+\newcommand{\sevs}{sous-espaces vectoriels}
+\newcommand{\ev}{espace vectoriel}
+\newcommand{\evs}{espaces vectoriels}
+\newcommand{\evn}{espace vectoriel normé}
+\newcommand{\dimf}{dimension finie}
+\newcommand{\ssil}{si et seulement s'il}
+\newcommand{\ssi}{si et seulement si}
+\newcommand{\sefp}{sauf éventuellement en un nombre fini de points}
+\newcommand{\cssa}{critère spécial des séries alternées}
+\newcommand{\var}{variable aléatoire réelle}
+\newcommand{\vars}{variables aléatoires réelles}
+\newcommand{\TVI}{théorème des valeurs intermédiaires}
+\newcommand{\TLM}{théorème de la limite monotone}
+\newcommand{\EAF}{égalité des accroissements finis}
+\newcommand{\IAF}{inégalité des accroissements finis}
+\newcommand{\varad}{variable aléatoire réelle à densité}
+\newcommand{\vard}{variable aléatoire réelle discrète}
+\newcommand{\variid}{variables aléatoires réelles indépendantes et identiquement distribuées}
+\newcommand{\ps}{presque sûrement}
+\newcommand{\bon}{base orthonormée}
+\newcommand{\DL}[2]{développement limité d'ordre $#2$ en $#1$}
+\newcommand{\cpm}{continue par morceaux}
+\newcommand{\nom}[1]{\textsc{#1}}
+\newcommand{\rec}{Fixons $n\in\N$, supposons $\mathcal{P}(n)$ et montrons $\mathcal{P}(n+1)$}
+\newcommand{\finrec}{Le principe de récurrence de conclure.}
+\newcommand{\iid}{indépendantes et identiquement distribuées}
+\newcommand{\EDLp}{équation différentielle linéaire du premier ordre}
+\newcommand{\EDLs}{équation différentielle linéaire du second ordre}
+\newcommand{\DES}{décomposition en éléments simples}
+\newcommand{\BW}{\nom{Bolzano}-\nom{Weierstrass}}
+%%Autre
+\newcommand{\defi}[1]{{\bfseries #1}}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\phi}{\varphi}
+\newcounter{y}
+\newcommand{\y}{\stepcounter{y}\alph{y}\left.\!\right)\, }%si besoin\setcounter{y}{1}
+
+\def\annee{2019/20}
+%% Fin du package
+\endinput

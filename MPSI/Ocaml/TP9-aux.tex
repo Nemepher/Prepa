@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=3cm]{geometry}
+
+\pagestyle{fancy}
+\fancyhead[L]{Augustin Albert}
+\fancyhead[C]{Option --- TP9}
+\fancyhead[R]{MPSI2 --- 2019/2020}
+
+\begin{document}
+\textsc{\bfseries Question 9:}
+\begin{itemize}
+	\item Terminaison:\\
+		La fonction une\_passe est appliqué récursivement un nombre fini de fois d'après le principe de descente infinie de Fermat: la longueur de la liste passé en argument décrois strictement et la fonction termine lorsque celle-ci vaut 0 ou 1.
+		Par les mêmes arguments, et car une\_passe termine bien, la fonction tri\_bulle termine également. 
+	\item Correction:\\
+		- La fonction une\_passe appliquée à une liste de longueur k \(\in \mathbb{N}\) renvoie une permutation de la liste dont la tête est le plus grand élément de la première liste: le résultat est vrai pour k \(\in\{0,1\}\). Supposons le vrai au rang k quelconque. On note l=t::q une liste de longueur k+1, m le max de q et l2=t2::q le résultat de une\_passe(l). Par hypothèse de récurrence t2 = max(t,m) = max(l). Le principe de récurrence de conclure.\\\\
+		- La fonction tri\_bulle appliquée à une liste  de longueur k \(\in \mathbb{N}\) renvoie la liste triée: le résultat est vrai pour k \(\in\{0,1\}\). Supposons le vrai au rang k quelconque. On note l=une liste de longueur k+1 et l2=t::q le résultat de une\_passe(l). Alors t est supérieur à tout élément de q, et par hypothèse de récurrence t::tri\_bulle(q) est bien trié. Le principe de récurrence de conclure.\\
+
+\end{itemize}
+
+\textsc{\bfseries Question 11:}
+Le pire cas correspond à une séquence de longues n pour laquelle n passes (le maximum) sont nécessaires. Il en existe: dans le cas des listes, les listes strictement décroissantes. A chaque passe la liste renvoyé est décroissante à partir du second terme car tout les éléments non minimum n'échangent de position qu'une fois, et ce avec le minimum. Le nombre de comparaisons réalisés est donc: 
+	\[(n-1)+(n-2)+...+1+0=\frac{n(n-1)}{2}=O(n{2})\]
+
+
+\textsc{\bfseries Question 12:}
+Notons \(M_{n}\) le nombre moyen de comparaisons réalisés pour une séquence de longueur n.\\
+Modèle 1: On suppose que le nombre de passes nécessaire suit une loi uniforme. (Hypothèse simplificatrice mais contestable !!). \[M_{n}=\sum_{k=1}^{n}\frac{1}{n}\sum_{l=0}^{k-1}(n-l)=\frac{1}{n}\sum_{k=1}^{n}(kn-k(k-1)/2)=\frac{(n+1)(2n+1}{3}=O(n^{2})\]
+Modèle 2: On suppose que les éléments de la séquence de longueur n sont distincts et répartis uniformément. On se ramène donc au cas d'une permutation quelconque de \([\![1,n]\!]\) que l'on note p. La séquence initiale est alors \([\![p^{-1}(1),...,p^{-1}(n)]\!]\). Notons de plus \(E_{n}\) et \(E_{n,k}\) le nombre moyen d'échanges réalisés pour une séquence de longueur n et le nombre d'échange moyen impliquant l'élément k.
+\begin{itemize}
+	\item \(E_{n,n}= n-p(n)\): l'élément n ne peut être décalé que vers la droite jusque à atteindre la position n.
+	\item \(E_{n,n-1}= \frac{1}{2}(((n-1)-p(n-1)+2) + ((n-1)-p(n-1)))=(n-1)-p(n-1)+1/2\): ou bien l'élément (n-1) est toujours décalé vers la droite, ou bien il rencontre l'élément n et est décalé vers la gauche puis vers la droite a nouveau et reprend sa position. (Il ne peut bien sur pas rencontrer l'élément n plusieurs fois)      
+	\item De manière générale, l'élément k peut rencontrer entre 0 et n-k éléments supérieurs. Ainsi, \(E_{n,k}= k-p(k)+\frac{0+\sum_{l=1}^{n-k}2{n-k\choose l}}{\sum_{l=0}^{n-k}{n-k\choose l}}=k-p(k)+2-2^{1+k-n})\) 		
+\end{itemize}
+
+Finalement, \(E_{n}=\frac{1}{2}\sum_{k=1}^{n}E_{n,k}=\frac{1}{2}(\sum k-\sum p(k)+\sum 2-2^{1+k-n})=\sum 1-2^{k-n}=n(n+1)/2-2+2^{-n}=O(n^{2})\).
+Ainsi, puisque la complexité est dans le pire cas \(O(n^{2}),\  O(n^{2})>=M_{n}>=E_{n}=O(n^{2})\) d'où \(M_{n}=O(n^{2})\).\\
+
+\textsc{\bfseries Question 15:}
+\begin{itemize}
+	\item Terminaison:\\
+		La fonction aux est constitué d'une boucle effectuant un nombre fixé de tours (fin-1) et est appliqué récursivement un nombre fini de fois d'après le principe de descente infini de Fermat: le variant fin-debut diminue strictement et fonction termine lorsque fin-debut=0   
+	\item Correction (de la version tableau alternative):\\
+		On considère la boucle for de la fonction aux et on note T(i) le i-ème élément du tableau.\\
+		- \`A la fin de la boucle et de l'échange final, les éléments d'indice strictement plus petit (resp. plus grand) que d sont strictement inférieurs (resp. supérieurs ou égaux) au pivot: en effet, par récurrence immédiate, à la fin de chaque tour de boucle pour tout d \(\in [\![debut,fin-1]\!]\),
+		\[\forall k\ tq\ debut \leq k \leq g,\ T(k)<T(fin)=pivot\ et\ \forall k\ tq\ g < k \leq d,\ T(k)>=pivot\] 
+		\`A la fin de la boucle et après l'échange du pivot et de l'élément d'indice d, on obtient bien la propriété annoncée.\\
+		Prouvons alors par récurrence forte sur la taille des tableaux la correction de la fonction tri\_rapide. Le résultat est vrai au rang 0 et 1. Au rang k, à la fin de la bouclee, après l'échange et après les appels récursifs, les éléments d'indice strictement inférieurs (resp. Supérieurs) à d sont par hypothèse de récurrence triés. D'après la propriété précédente le tableau est trié. 	
+\end{itemize}
+
+\textsc{\bfseries Question 16:}
+Considérons une séquence de longueur n. A la première étape, notant k la longueur de la séquence, (k-1) comparaisons au pivot sont toujours effectués. Dans le pire des cas, le pivot sélectionné est toujours strictement supérieur aux autres et la subdivision obtenue est : deux séquences de longueurs 0 et (k-1). Ainsi, il y a à la n-ième étape k-n comparaisons: le maximum. En effet, dans le cas contraire, il existe une étape n pour laquelle il existe l \(\in [\![1, k-(n-1)-2]\!]\) tel que les subdivisions soient de longueur l et k-l-1. Il y a alors \((l-1)+(k-(n-1)-l-1-1)=k-(n+1)-1 < k-(n+1)\) comparaisons à la l'étape suivante. Revenons au pire cas: n étapes sont alors nécessaires. Le nombre total de comparaisons est donc: 
+	\[(n-1)+(n-2)+...+1+0=\frac{n(n-1)}{2}=O(n^{2})\]
+Un tel cas se produit avec la première implémentation pour les tableaux lorsque la séquence est strictement croissante: le pivot sélectionné étant maximal, aucune modification n'est effectué sur le tableau est l'ordre est conservé à chaque étape.\\ 
+
+\textsc{\bfseries Question 18:}
+Notons pour tout entier k \(M_{k}\) le nombre moyen de comparaisons réalisé pour des séquences de taille k. Soit n un entier. n-1 comparaisons sont réalisés lors de la première étape. On suppose de plus que la position du pivot dans la séquence triée suit une loi de probabilité uniforme (et donc la longueur des partitions aussi). Ainsi : 
+	\[M_{n} =n-1 + \frac{1}{n}\sum_{k=0}^{n-1}(M_{k}+M_{n-1-k})
+		=n-1 + \frac{2}{n}\sum_{k=0}^{n-1}M_{k}\]
+D'après le théorème 16.7 du chapitre 16, on obtient directement que \(M_{n}=O(n\ln(n))\).
+
+\end{document}

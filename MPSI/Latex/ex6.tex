@@ -1,0 +1,23 @@
+\documentclass[a4paper]{article}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{../mpsi}
+
+\newcommand{\fai}[2]{\forall #1 \in #2,\ }
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[L]{Augustin Albert}
+\fancyhead[R]{MPSI2 --- 2019/2020}
+\fancyhead[C]{Exercice 6, quesion 3}
+
+Contraposons et montrons que n-2 transpositions ou moins n'engendrent pas Sn. Si l'on dispose d'une famille de moins de n-2 transposition, puisque Sn en comporte n*n-1/2, il est toujours possible d'en rajouter jusque à en obtenir n-2. Il suffit donc de traiter le cas k = n-2.   
+
+Etudions les cas n=2 et n=3.
+Si n=2, les seules permutations sont l'identité et la transposition (1 2). Une famille de 0 transposition ne peut générer que l'identité. 
+Si n=3, une unique transposition ne peut générer que l'identité et elle même, et donc aucune famille de 1 transposition ne peut générer de 3-cycles.  
+
+Montrons donc qu'une famille de n-2 vecteur ne peut générer de n-cycle. Fixons une telle famille F. Un n-cycle ne possède qu'une orbite à n éléments. Si l'un des élément de F commute avec tous les autres, alors il ne peut pas permettre de générer une n-cycle, car la permutation obtenue aurait l'orbite de cet élément parmi ses propres orbites. On se ramène alors au cas ou aucun élément no commute avec les autres. Cela signifie que chaque transposition possède dans son support au moins un élément présent dans le support d'une autre transposition de F. De plus, u élémnent de 1 n n'apparaissant dans aucun des support des élément de F est fixé par toute pemutation généré par la famille. On note E la réunion des support des éléments de F. F étant fini, on peut la dénombrer.  Une permutation générée par les éléments de F fixe au minimum 1 élément de 1 n. 
+
+\end{document}

@@ -1,0 +1,27 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{../mpsi}
+
+\newcommand{\sumkn}{\bigsum_{k=1}^{n}}
+\newcommand{\intentp}[3]{\intent{#1}{#2}\backslash\lbrace{#3}\rbrace}
+\newcommand{\fai}[2]{\forall #1 \in #2,\ }
+
+\begin{document}
+\textsc{\bfseries\huge Exercice 11}\\
+
+Soit A \(\in \M_{n}(\C) \) tel que pout tout entier i de \(\intent{1}{n}\),
+\[ \card{A_{i,i}} > \bigsum_{j \in \intentp{1}{n}{i}} \card{A_{i,j}} \]
+Montrons que A est inversible, et trouvons lui donc un inverse !\\ 
+
+Montrons dans un premier temps l'injectivité de Can(A). Fixons B \( \in \M_{1,n}(\C)\) tel que AB=0 et montrons que B est la colonne nulle. Si B est nul, c'est gagné! Sinon, l'ensemble suivant est non vide : \(E := \left\{\card{B_{i,1}} \tq B_{i,1}\neq0,\ i \in \intent{1}{n}\right\}\). On fixe alors \(m \in\intent{1}{n} \tq \card{B_{m,1}}=max(E)\) qui existe car E est une partie de \(\R\) finie non vide.\\
+
+Puisque AB=0, \(0=[AB]_{m,1}=\sumkn A_{m,k}B_{k,1} \donc : \) \[  \card{A_{m,m}}\card{B_{m,1}} = \card{\bigsum_{k \in \intentp{1}{n}{m} }A_{m,k}B_{k,1}} \leq\bigsum_{k \in \intentp{1}{n}{m} }\card{A_{m,k}}\card{B_{k,1}} \leq \bigsum_{k \in \intentp{1}{n}{m} }\card{A_{m,k}}\card{B_{m,1}} \] 
+
+Et puisque \(m \in E\) alors \(B_{m,1} \ne 0\) et en divisant de chaque coté on obtient  \[\card{A_{m,m}} \leq \bigsum_{k \in \intentp{1}{n}{m} }\card{A_{m,k}}  \]
+
+ce qui contredit l'hypothèse faite sur A. B est donc nécessairement nul. Can(A) est une application linéaire de \(\M_{1,n}(\C)\) dans lui même. Puisque cet ensemble est de dimension fini, l'injectivité de Can(A) équivaut à sa surjectivité.\\
+
+Il existe donc \((B_{i})_{i\in\intent{1}{n}}\) tel que \(\fai{i}{\intent{1}{n}} AB_{i}=E_{i} \). D'où \(A\left[\begin{array}{c|c|c}
+		B_{1} & ... & B_{n} \\
+		\end{array}\right]=I_{n}\)
+
+\end{document}

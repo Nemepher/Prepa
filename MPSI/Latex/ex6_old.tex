@@ -1,0 +1,25 @@
+\documentclass[a4paper]{article}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{../mpsi}
+
+\newcommand{\fai}[2]{\forall #1 \in #2,\ }
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[L]{Augustin Albert}
+\fancyhead[R]{MPSI2 --- 2019/2020}
+\fancyhead[C]{Exercice 6, quesion 3}
+
+Considérons le cas \(k<=n-2\). Alors puisque \(\scr{S}_{n}\) comporte \(n*(n+1)/2\), on peut rajouter n-2-k transpositions à notre famille de k transposition, et celle-ci génerera toujours \(\scr{S}_{n}\). 
+On est donc ramené au cas \(k=n-2\). Fixons donc une telle famille F de transpositions. \(\fai{i}{\intent{1}{2}}\), il existe au moins une transpostion faisant intervenir i. Dans le cas contraire, il serait impossible de générer (1 i) ou (2 i). Il existe donc a1,...,an-2 dans 1 n tq ak!=k F = (1 a1), ... ,(n-2, an-2). La remarque précédente étant aussi valable pour n-1 et n, il existe donc m1,m2 dans 1 n tq am1=n-1 et am2 = n. Mais alors, {a1,...,an-2}/{n-1,n} comporte au plus n-4 éléments dans 1 n-2. Il existe donc i,j dans n-2 n'appartennant pas a {a1,...,an-2}
+
+Montrons que deux transpositions ne peuvent générer qu'une transposition au plus différente d'elles meme et de l'identité.
+- support disjoins : aucune nouvelle transpositon possible 
+- meme support : aucune // 
+- un seul élémente en commun : une nouvelle b c. Les autres sont soient connue soient impossible à générer car les elements concernés ne sont présents dans aucun des deux support. (a c)(b c)(a c)
+
+
+
+\end{document}
