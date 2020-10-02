@@ -6,7 +6,6 @@ let g n = match n with
         | 0 -> 0
         | n -> 1 / n ;;
 
-
 let rec somme_cubes n = match n with 
         | 0 -> 0 
         | n -> n*n*n + somme_cubes (n-1) ;;
@@ -28,6 +27,7 @@ let rec puissance x n = match n with
         | 0 -> 1
         | n -> x * puissance x (n-1) ;;
 puissance 2 3;;
+
 
 let rec puissance_rapide x n = match n with 
         | 0 -> 1
