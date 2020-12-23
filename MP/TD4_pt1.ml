@@ -239,25 +239,6 @@ let explore_graphique_rec a depart arrive = let b = copie_tableau a and pile = c
 ;;
 
 
-(* brouillon pour la 
-let marque position pere b = let (x,y) = position in b.(x).(y) <- pere;;
-
-let explore_largeur a depart arrive = let (l,c) = dimensions a in let b = Array.make_matrix l c (-1,-1) and file = cree_file (l*c) (-1,-1) in 
-        enfile depart file;;
-        marque depart depart b;;
-        while not file_vide file do 
-                let position = defile file in 
-                        if impasse position b || !i>q then (depile pile; decr i) else (
-                                let objectif = suivant position b in 
-                                visite objectif b;
-                                empile objectif pile; 
-                                chemin := objectif :: !chemin;
-                                incr i;
-                        )
-        done;
-*)
-
-
 let a = cree_labyrinthe 20 20;;
 explore_graphique a (0,0) (10,10);;
 
