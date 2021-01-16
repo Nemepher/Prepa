@@ -31,14 +31,11 @@ est_col graphe etiquette;;
 let rec deux_col_aux gphe x etiq v n = 
         let v2 = (v+1) mod 2 and col = ref true and i = ref 0 in 
         etiq.(x) <- v;
-        while !i<>n && !col do print_int x; print_int !i; if gphe.(x).(!i) then (
-                
-                print_string "in ";
+        while !i<>n && !col do if gphe.(x).(!i) then (
                 if etiq.(!i) = -1 then col:= deux_col_aux gphe !i etiq v2 n;
                 if etiq.(!i) = v && !i<>x then col := false
 
         );
-        print_string " ";
         incr i;
         done;
         !col
@@ -77,3 +74,101 @@ let glouton gphe num = let n = Array.length num in
 ;;
 
 glouton graphe [|1;2;3;0;4|];;
+
+let echange v i j = let temp = v.(i) in 
+        v.(i) <- v.(j);
+        v.(j) <- temp
+;;
+
+let indice_maximum v i j = let resultat = ref i in 
+        for k = i+1 to j do 
+                if v.(!resultat) < v.(k) then resultat:=k
+        done;
+        !resultat
+;;
+
+let tri_selection v1 v2 = let n = Array.length v1 in 
+        for i = 0 to (n-2) do 
+                let i2 = indice_maximum v2 i (n-1) in 
+                echange v1 i i2;
+                echange v2 i i2;
+        done
+;;
+
+let tri_degre gphe = let n = Array.length gphe.(0) in 
+        let degre = Array.make n 0 in 
+        for i = 0 to (n-1) do
+                let s = ref 0 in
+                for j = 0 to (n-1) do 
+                        if gphe.(i).(j) && i<>j then incr s
+                done;
+                degre.(i) <- !s
+        done;
+        let sommet = Array.make n 0 in 
+        for i = 0 to (n-1) do 
+                sommet.(i) <- i
+        done;
+        tri_selection sommet degre;
+        sommet
+;;
+
+tri_degre graphe;;
+
+let sous_graphe gphe sg = let n = Array.length sg in 
+        let gphe2 = Array.make_matrix n n false in
+        for i = 0 to (n-1) do
+              for j = 0 to (n-1) do 
+                    gphe2.(i).(j) <- gphe.(sg.(i)).(sg.(j))
+              done
+        done;
+        gphe2
+;; 
+
+sous_graphe graphe [|0;3;1|];;
+
+let voisins_non_colories gphe etiq s = let n = Array.length gphe.(0) and resultat = ref [] in 
+        for i = 0 to n-1 do 
+                if gphe.(s).(i) && etiq.(i) = -1 then resultat := i::!resultat 
+        done;
+        !resultat
+;;
+
+voisins_non_colories graphe [|1;-1;-1;-1;-1|] 0;;
+
+let degre_non_colories gphe etiq s = List.length (voisins_non_colories gphe etiq s);;
+
+degre_non_colories graphe [|1;-1;-1;-1;-1|] 0;;
+
+let  non_colories gphe etiq = let n = Array.length etiq and resultat = ref [] in 
+        for i = 0 to n-1 do
+                if etiq.(i) = -1 then resultat := i::!resultat
+        done;
+        !resultat
+;;
+
+non_colories graphe [|1;-1;-1;-1;-1|];;
+
+
+let wigderson gphe = let n = Array.length gphe and c = ref 0 and racine = floor ( sqrt (float_of_int n)) in 
+        let etiq = Array.make n (-1) in 
+        for i = 0 to n-1 do
+                if etiq.(i) = -1 && degre_non_colories gphe etiq i >= racine then (
+                        (* colorier le sous graphe induuit avec la couleur c et c+1 *)
+                        (* retourner nb_couleur                                     *)
+                        if nb_couleur = 2 then incr i;
+                        incr i
+                )
+        done; 
+        non_col = non_colories gphe etiq;
+        
+        (* calculer le vecteur des sommets non coloriés *)
+        (* appliquer glouton au sous graphe induit par le vectuer de sommet *)
+        (* ajouter c à la couleur de chacun de ses sommets et inserer le resultat dans etiq (l'original) *)
+        
+        etiq
+;;
+
+
+        
+
+
