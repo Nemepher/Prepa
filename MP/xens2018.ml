@@ -9,11 +9,16 @@ graphe.(1).(3) <-true;;
 graphe.(3).(1) <-true;; 
 graphe.(0).(3) <-true;; 
 graphe.(3).(0) <-true;;
-(*
-graphe.(0).(1) <-true;;
-graphe.(1).(0) <-true;;
-*)
 graphe;;
+
+let graphe = [|
+             [|false;false;true;true;false|];
+             [|false;false;false;true;true|];
+             [|true;false;false;false;true|];
+             [|true;true;false;false;false|];
+             [|false;true;true;false;false|]
+             |];;
+
 
 let etiquette = [|0;0;0;1;1|]
 
@@ -50,6 +55,25 @@ let deux_col gphe = let n = Array.length gphe.(0) in
         if !col then etiq else [||]
 ;;
 
+let rec deux_col_aux gphe x etiq v n = 
+        let v2 = (v+1) mod 2 in 
+        etiq.(x) <- v;
+        for i=0 to n-1 do if gphe.(x).(i) then (
+                if etiq.(i) = -1 then deux_col_aux gphe i etiq v2 n;
+                if etiq.(i) = v && i<>x then failwith "pas 2-coloriable"
+                );
+        done;
+;; 
+
+let deux_col gphe = let n = Array.length gphe.(0) in 
+        let etiq = Array.make n (-1) in
+        for i=0 to n-1 do  
+                if etiq.(i) = -1 then deux_col_aux gphe i etiq 0 n;
+        done;
+        etiq
+;;
+
+
 deux_col graphe;;
 
 let min_couleur_possible gphe etiq s =
@@ -65,9 +89,11 @@ let min_couleur_possible gphe etiq s =
 
 min_couleur_possible graphe etiquette 1;;
 
+
+(* Il est important d'utiliser la longeur de num plutot que gphe dans le cas d'un sous graphe !!!*)
 let glouton gphe num = let n = Array.length num in 
         let etiq = Array.make n (-1) in
-        for i =0 to n-1 do
+        for i=0 to n-1 do
                 etiq.(num.(i)) <- min_couleur_possible gphe etiq num.(i)
         done;
         etiq
@@ -149,26 +175,56 @@ let  non_colories gphe etiq = let n = Array.length etiq and resultat = ref [] in
 non_colories graphe [|1;-1;-1;-1;-1|];;
 
 
-let wigderson gphe = let n = Array.length gphe and c = ref 0 and racine = floor ( sqrt (float_of_int n)) in 
-        let etiq = Array.make n (-1) in 
+let array_of_list l = let n = List.length l in if n=0 then [||] else let v = Array.make n (List.hd l) and l2 = ref (List.tl l) in 
+        for i = 1 to n-1 do
+                v.(i) <- List.hd !l2;
+                l2 := List.tl !l2
+        done;
+        v
+;;
+
+
+let actualise etiq etiq_non_col non_col c = 
+        let nb_couleur = ref 1 and
+        m = Array.length non_col in
+        for i = 0 to m-1 do
+                if etiq_non_col.(i) > 0 then nb_couleur := 2; 
+                etiq.(non_col.(i)) <- etiq_non_col.(i) + !c
+        done;
+        !nb_couleur
+;;
+
+
+let wigderson gphe = 
+
+        let c = ref 0 and 
+        n = Array.length gphe in
+        let racine = int_of_float ( sqrt (float_of_int n)) and 
+        etiq = Array.make n (-1) in 
+        
         for i = 0 to n-1 do
                 if etiq.(i) = -1 && degre_non_colories gphe etiq i >= racine then (
-                        (* colorier le sous graphe induuit avec la couleur c et c+1 *)
-                        (* retourner nb_couleur                                     *)
-                        if nb_couleur = 2 then incr i;
-                        incr i
-                )
-        done; 
-        non_col = non_colories gphe etiq;
+                        let non_col = array_of_list ( voisins_non_colories gphe etiq i ) in
+                        let etiq_non_col = deux_col (sous_graphe gphe non_col) in
+                        let nb_couleur = actualise etiq etiq_non_col non_col c in
+                        if nb_couleur = 2 then incr c;
+                        incr c
+                );
+        done;
+
+
         
-        (* calculer le vecteur des sommets non coloriés *)
-        (* appliquer glouton au sous graphe induit par le vectuer de sommet *)
-        (* ajouter c à la couleur de chacun de ses sommets et inserer le resultat dans etiq (l'original) *)
+        let non_col = array_of_list ( non_colories gphe etiq ) in 
+        let m = Array.length non_col in 
+        let num = Array.make m 0 in 
+        for i = 1 to m-1 do 
+                num.(i) <- i
+        done;
+        let etiq_non_col = glouton (sous_graphe gphe non_col) num in   
+        let _ = actualise etiq etiq_non_col non_col c in
         
         etiq
 ;;
 
 
-        
-
-
+wigderson graphe;;
