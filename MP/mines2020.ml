@@ -37,17 +37,40 @@ let rec valence tr = match tr with
 
 type creux = int * int array * unicode array * unicode array;;
 
-let est_present (theta:creux) u = let (v,_,i,a) = theta in a.(u) <= v && i.(a.(u)) = u;;
+let est_present (theta:creux) (u:unicode) = let (v,_,i,a) = theta in a.(u) <= v && i.(a.(u)) = u;;
 
-let incremente_tableaucreux (theta:creux) u = let (_,f,_,_) = theta in f.(u) <- f.(u) + 1;;
+let incremente_tableaucreux (theta:creux) (u:unicode) = let (v,f,i,a) = theta in 
+        if est_present theta u then (f.(u) <- f.(u) + 1; theta)
+        else (
+                f.(u) <- 1;
+                a.(u) <- v;
+                i.(v) <- u;
+                (v+1,f,i,a)
+        )
+;;
 
-let make_creux = (0,Array.make lambda 0,Array.make lambda 0,Array.make lambda 0);; 
- 
-let cree_tableau_creux t = 
-        
+let make_creux:creux = (0, Array.make lambda 0, Array.make lambda 0, Array.make lambda 0);; 
 
+incremente_tableaucreux make_creux 4;;
 
+let rec cree_tableau_creux (t:texte) :creux = match t with 
+        []       -> make_creux
+      | u::suite -> incremente_tableaucreux (cree_tableau_creux suite) u
+;;   
 
+type binaire = bool list;;
+type code =
+        | Nil 
+        | Noeud of unicode * binaire * code * code;;
 
+let rec parcours (u:unicode) (c:code) = match c with 
+        Nil -> failwith "dommage..."
+      | Noeud (s,b,_,_) when s=u -> b
+      | Noeud (s,_,c2,_) when s>u -> parcours u c2
+      | Noeud (s,_,_,c2)         -> parcours u c2
+;; 
 
-
+let rec encodeur (t:texte) (c:code) = match t with 
+        []       -> [] 
+      | u::suite -> let b = parcours u c in b:: encodeur suite c
+;; 
